@@ -2,8 +2,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const axios = require('axios');
 require ('dotenv') .config();
 const TOKEN =process.env.TOKEN;
-const bot = new TelegramBot( {polling: true});
-
+const bot = new TelegramBot(TOKEN, {polling: true})  
 let subscribers = {};
 
 bot.onText(/\/start/, (msg, match) => {
@@ -65,9 +64,9 @@ bot.onText(/\/admin/, (msg, match) => {
       }
     });
   });
-  
+ 
   // Handle admin commands
-bot.onText(/\/manage_subscribers/, (msg, match) => {
+bot.onText('Manage subscribers', (msg, match) => {
     const chatId = msg.chat.id;
     const numSubscribers = Object.keys(subscribers).length;
     bot.sendMessage(chatId, `There are ${numSubscribers} subscribers.`);
